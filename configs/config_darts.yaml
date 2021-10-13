@@ -1,0 +1,96 @@
+###### Model
+model: 'darts' # resnet34, darts,mobilenetv2
+###### Paths
+post_fix: '1' # Change when running experiments
+
+###### Application Specific ######
+dataset: 'CIFAR100' # options: CIFAR100, CIFAR10, ImageNet
+network: 'DARTS' # options: DASNet34, DARTS, DARTSPlus
+optim_method: 'SGD' # options: SGD, AdaM, AdaGrad, RMSProp, AdaDelta
+lr_scheduler: 'AdaS' # options: AdaS (with SGD), StepLR, CosineAnnealingWarmRestarts, OneCycleLR
+
+### Optimization
+optimization_algorithm: 'SA' # options: greedy, SA
+ALPHA: 5
+epoch_selection: 'max' #options: max, min, avg, last
+scaling_method: 'default' # options: default
+
+### Number of times to run full_train ###
+train_num: 0 #only used if > 0
+
+### DARTS CELLS ###
+num_cells: 7 #Number of cells, either 7 or 20
+
+### weight transfer type ###
+wt_type: 'SVD' # EVBMF, SVD
+
+### New metrics big W (also called stacked weight) ###
+window_size: 50 # number of columns of big_W (number of iterations of weights)
+update_iter: 50 # number of iterations in a mini batch to update  big_W once
+
+### DELTA SCALING
+sel_metric: 'MQC' # MKG (momentum knowledge gain), MR (momentum rank), MQC (arctan(R/MC)), MR-sw (momentum rank stacked weight), newQC (new Quality Metric)
+gamma: 0.8 #Try 0.6, 0.8, 0.95 #Change
+init_step_size: 16
+delta_scale: 1 #Try 1, 2, 3
+
+###### Suggested Tune ######
+init_lr: 0.175 #0.03
+init_lr_full: 0.175
+beta: 0.8
+beta_full: 0.95
+full_train_only: False #False = search + train
+init_conv_setting: '3,3' #just for file naming uniqueness purposes, but MUST to be ints separated by commas "1,2,3,4", NO strings/characters
+
+adapt_trials: 36 #25 #Set to 1 for kernel adapt ONLY if kernel_adapt is ON (set to 1)
+adapt_trials_kernel: 0
+initial_epochs: 2 # Change
+epochs_per_trial: 2 # Change
+
+mapping_condition_threshold: 10 #doesnt matter for kernel adapts only
+delta_threshold_kernel: 0.75 #This is a percentage, 0.25, 0.5, 0.75
+delta_threshold: 0.0075 #doesnt matter for kernel adapts only
+delta_threshold_values:
+  - 0.0075
+delta_threshold_kernel_values:
+  - 0.75
+kernel_adapt: 0 #0 for NO kernel adaptations, 1 for kernel adaptions
+parameter_type: 'channel' #'both' for simultaneously searching kernel and conv, else 'channel' for consecutive channel/kernel search
+
+max_kernel_size: 9
+min_kernel_size: 1
+min_kernel_size_2: 1
+max_conv_size: 256
+min_conv_size: 16
+
+stable_epoch: 0
+min_scale_limit: 0.01
+factor_scale: 0.2
+factor_scale_kernel: 1
+blocks_per_superblock: -1 #set to -1 for DasNet34 structure, 2 for all 2s, 3 for all 3s
+
+###### Suggested Default ######
+max_epoch: 250 #250
+mini_batch_size: 128
+early_stop_threshold: -1 # set to -1 if you wish not to use early stop, or equally, set to a high value. Set to -1 if not using AdaS
+early_stop_patience: 10 # epoch window to consider when deciding whether to stop
+weight_decay: 3e-4 #5e-4 #5e-4 for DARTS, DARTSPLUS, ResNet during training. Do not change for ResNet during full train!
+
+min_lr: 0.00000000000000000001
+zeta: 1.0
+p: 1 # options: 1, 2.
+loss: 'cross_entropy' # options: cross_entropy
+
+#NOTE: WE ARE NOT USING DEFAULT DARTS HYPERPARAMTERS Right now. Only keeping them for reference
+#### Default Hyperparameters from DARTS code ####
+#DARTS_max_epoch: 600 #default - 600 - NOT USED
+DARTS_mini_batch: 96 #default 96
+auxiliary: False #Set to true during full run
+auxiliary_weight: 0.4 #default 0.4
+drop_path: False # Set to true during full run
+drop_path_prob: 0.2 #default 0.2
+grad_clip: False
+grad_clip_threshold: 5 #Default 5
+cutout: False
+cutout_length: 16
+DARTS_weight_decay: 3e-4
