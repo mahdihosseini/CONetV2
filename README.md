@@ -1,7 +1,7 @@
-# Efficient and Versatile Channel Size Optimization for CNNs
+# CONetV2: Efficient Auto-Channel Size Optimization for CNNs
 
 
-**Exciting News! *CONetV2: Efficient Channel Size Optimization for CNNs* has been accepted to the International Conference on Machine Learning and Applications (ICMLA) 2021 for Oral Presentation!**
+**Exciting News! *CONetV2: Efficient Auto-Channel Size Optimization for CNNs* has been accepted to the International Conference on Machine Learning and Applications (ICMLA) 2021 for Oral Presentation!**
 
 
 > [**CONetV2: Efficient Auto-Channel Size Optimization for CNNs**](link),            
