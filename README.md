@@ -8,7 +8,7 @@
 > Yi Ru Wang, Samir Khaki, Weihang Zheng, Mahdi S. Hosseini, Konstantinos N. Plataniotis        
 > *In Proceedings of the IEEE International Conference on Machine Learning and Applications ([ICMLA](https://www.icmla-conference.org/icmla21/))* 
 
-Checkout our arXiv preprint: [Paper]()
+Checkout our arXiv preprint: [Paper](https://arxiv.org/abs/2110.06830)
 
 ![](figures/Pipeline.png)
 
